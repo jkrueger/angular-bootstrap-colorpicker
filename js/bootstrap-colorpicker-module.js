@@ -220,9 +220,12 @@ angular.module('colorpicker.module', [])
           slider.left = event.pageX - targetOffset.left - window.pageXOffset + targetOffset.scrollX;
           slider.top = event.pageY - targetOffset.top - window.pageYOffset + targetOffset.scrollY;
 
+          var offx = (event.offsetX || event.pageX - $(event.target).offset().left);
+          var offy = (event.offsetY || event.pageY - $(event.target).offset().top);
+
           pointer = {
-            left: event.pageX - ((event.offsetX ? event.offsetX : event.layerX) - slider.left),
-            top: event.pageY - ((event.offsetY ? event.offsetY : event.layerY) - slider.top)
+            left: event.pageX - (offx - slider.left),
+            top:  event.pageY - (offy - slider.top)
           };
         },
         setSaturation: function(event, fixedPosition) {
